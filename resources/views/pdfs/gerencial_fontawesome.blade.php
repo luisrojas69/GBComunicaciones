@@ -46,7 +46,7 @@
         .icon-money { color: #f39c12; }
         .icon-money::before { content: "\f0d6"; } /* fa-money-bill */
         
-        .icon-chart { color: #3498db; }
+        .icon-chart { color: #4BD528; }
         .icon-chart::before { content: "\f201"; } /* fa-chart-line */
         
         .icon-gear { color: #95a5a6; }
@@ -70,19 +70,19 @@
         .icon-warning { color: #f39c12; }
         .icon-warning::before { content: "\f071"; } /* fa-exclamation-triangle */
         
-        .icon-calendar { color: #3498db; }
+        .icon-calendar { color: #4BD528; }
         .icon-calendar::before { content: "\f133"; } /* fa-calendar-alt */
         
         .icon-party { color: #9b59b6; }
         .icon-party::before { content: "\f79c"; } /* fa-gifts */
         
-        .icon-info { color: #3498db; }
+        .icon-info { color: #4BD528; }
         .icon-info::before { content: "\f05a"; } /* fa-info-circle */
         
-        .icon-date { color: #3498db; }
+        .icon-date { color: #4BD528; }
         .icon-date::before { content: "\f133"; } /* fa-calendar */
         
-        .icon-people { color: #34495e; }
+        .icon-people { color: #6EA560; }
         .icon-people::before { content: "\f0c0"; } /* fa-users */
 
         /* ========= Header Profesional (FIXED con Table Layout) ========= */
@@ -92,9 +92,9 @@
             left: 0;
             right: 0;
             height: 24mm;
-            background: #2c3e50;
-            background: -webkit-gradient(linear, left top, right bottom, from(#2c3e50), to(#34495e));
-            background: -webkit-linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: #557A4C;
+            background: -webkit-gradient(linear, left top, right bottom, from(#557A4C), to(#6EA560));
+            background: -webkit-linear-gradient(135deg, #557A4C 0%, #6EA560 100%);
             -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             z-index: 1000;
@@ -172,7 +172,7 @@
             right: 0;
             height: 12mm;
             background: #f1f3f5;
-            border-top: 2px solid #3498db;
+            border-top: 2px solid #4BD528;
             z-index: 1000;
         }
 
@@ -202,10 +202,10 @@
         .section-title {
             font-size: 11pt;
             font-weight: 700;
-            color: #2c3e50;
+            color: #557A4C;
             margin: 6mm 0 4mm 0;
             padding-bottom: 2mm;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #4BD528;
             position: relative;
         }
 
@@ -216,7 +216,7 @@
             left: 0;
             width: 40px;
             height: 2px;
-            background: #2c3e50;
+            background: #557A4C;
         }
         
         .section-title .icon {
@@ -265,14 +265,14 @@
         }
 
         .card-header {
-            background: #f8f9fa;
-            background: -webkit-gradient(linear, left top, right top, from(#f8f9fa), to(#fff));
-            background: -webkit-linear-gradient(left, #f8f9fa, #fff);
+            background: #F0FBF0;
+            background: -webkit-gradient(linear, left top, right top, from(#F0FBF0), to(#fff));
+            background: -webkit-linear-gradient(left, #F0FBF0, #fff);
             padding: 3.5mm 4mm;
             border-bottom: 1px solid #dee2e6;
             font-weight: 700;
             font-size: 9.5pt;
-            color: #2c3e50;
+            color: #557A4C;
         }
 
         .card-header-wrapper {
@@ -362,7 +362,7 @@
         }
 
         .badge-primary {
-            background: #3498db;
+            background: #4BD528;
             color: #fff;
         }
 
@@ -398,7 +398,7 @@
             background: #e9ecef;
             background: -webkit-gradient(linear, left top, left bottom, from(#f1f3f5), to(#e9ecef));
             background: -webkit-linear-gradient(top, #f1f3f5, #e9ecef);
-            color: #2c3e50;
+            color: #557A4C;
             font-weight: 700;
             padding: 2.5mm 3mm;
             text-align: left;
@@ -568,7 +568,7 @@
         .fw-bold { font-weight: 700; }
         .fw-semibold { font-weight: 600; }
         .text-muted { color: #6c757d; }
-        .text-primary { color: #2c3e50; }
+        .text-primary { color: #557A4C; }
         .text-success { color: #27ae60; }
         .text-danger { color: #e74c3c; }
         .text-warning { color: #f39c12; }
@@ -644,7 +644,7 @@
             <div class="header-center">
                 <h1 class="header-title">Reporte Gerencial Consolidado</h1>
                 <p class="header-subtitle">
-                    Período: <strong>{{ $data['periodo_start'] ?? 'N/A' }}</strong> - <strong>{{ $data['periodo_end'] ?? 'N/A' }}</strong>
+                    Período: <strong>{{ $data['periodo'] ?? 'No Definido' }}</strong> - <strong>Generado el: {{ date('Y-m-d H:i:s') ?? 'N/A' }}</strong>
                 </p>
             </div>
             <div class="header-right">
@@ -653,7 +653,7 @@
                     {{ date('h:i A') }}
                 </div>
                 <div class="page-number page-counter">
-                    Pág. <span class="page"></span>/<span class="pages"></span>
+                    Pág. <span class="page">1</span>/<span class="pages">2</span>
                 </div>
             </div>
         </div>
@@ -726,7 +726,8 @@
                                     <tr>
                                         <th style="width: 12%;">Rank</th>
                                         <th style="width: 53%;">Descripción</th>
-                                        <th class="text-right" style="width: 35%;">Monto (Bs.)</th>
+                                        <th class="text-right" style="width: 15%;">Cantidad</th>
+                                        <th class="text-right" style="width: 25%;">Monto (Bs.)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -744,6 +745,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $v->art_des }}</td>
+                                            <td style="text-align: right;">{{ number_format($v->CantidadVendida, 0, ',', '.') }}</td>
                                             <td class="text-right fw-bold text-primary">{{ number_format($v->MontoTotal, 2, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
@@ -904,7 +906,7 @@
                     <div class="card-body">
                         @if (!empty($data['personal_vacaciones']) && $data['personal_vacaciones']->count() > 0)
                             <div class="status-message status-warning mb-3">
-                                <i class="fa-solid fa-calendar-alt icon-calendar"></i> <strong>{{ $data['personal_vacaciones']->count() }}</strong> colaboradores programados
+                                <i class="fa-solid fa-calendar-alt icon-calendar"></i> <strong>{{ $data['personal_vacaciones']->count() }}</strong> compañeros de vacaciones
                             </div>
                             <table class="table table-striped">
                                 <thead>
@@ -952,7 +954,7 @@
                     <div class="card-body">
                         @if (!empty($data['cumpleaneros_semana']) && $data['cumpleaneros_semana']->count() > 0)
                             <div class="status-message status-success mb-3">
-                                <i class="fa-solid fa-gifts icon-party"></i> <strong>{{ $data['cumpleaneros_semana']->count() }}</strong> colaboradores celebran esta semana
+                                <i class="fa-solid fa-gifts icon-party"></i> <strong>{{ $data['cumpleaneros_semana']->count() }}</strong> compañeros celebran esta semana
                             </div>
                             <table class="table table-striped">
                                 <thead>

@@ -107,6 +107,6 @@
 
     <div class="footer">
         <p style="font-size: 14px; margin-bottom: 5px; color: #555;">Somos Granja Boraure</p>
-        <img src="{{ asset('images/logo.png') }}" alt="Logo Granja Boraure" class="logo">
+        <img src="{{ $message->embed(public_path('images/logo.png')) }}" alt="Logo Granja Boraure" class="logo">
     </div>
 </div>

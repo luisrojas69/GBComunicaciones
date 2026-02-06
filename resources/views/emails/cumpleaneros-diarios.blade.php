@@ -84,7 +84,7 @@
 
         @foreach ($cumpleanerosHoy as $empleado)
             <div class="section">
-                <img src="{{ asset('images/image-1.png') }}" alt="Cupcake de Cumpleaños" style="width: 100px; height: auto; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto;">
+                <img src="{{ $message->embed(public_path('images/image-1.png')) }}" alt="Cupcake" style="width: 100px; height: auto; display: block; margin: 0 auto 15px auto;">
                 
                 <h3 class="section-title">🎂 ¡Feliz Día, {{ $empleado->nombre_completo }}! 🎂</h3>
                 
@@ -103,7 +103,7 @@
         </p>
     </div>
 
-    <div class="footer">
-        <p>Este es un mensaje generado automáticamente. Por favor, no responder a este correo.</p>
+    <div style="background-color: #e9e9e9; color: #777777; text-align: center; padding: 20px; font-size: 12px; border-radius: 0 0 8px 8px;">
+        <p style="margin: 0;">Este es un mensaje generado automáticamente. Por favor, no responder a este correo.</p>
     </div>
 </div>

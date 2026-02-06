@@ -27,7 +27,7 @@ class EnviarCumpleanerosMensual extends Command
 
         $cumpleanerosMes = Empleado::where('status', 'A')
             ->whereRaw('MONTH(fecha_nac) = ?', [$today->month])
-            ->whereRaw('DAY(fecha_nac) != ?', [$today->day])
+           // ->whereRaw('DAY(fecha_nac) != ?', [$today->day])
             ->orderByRaw('DAY(fecha_nac)') 
             ->get();
 

@@ -23,7 +23,7 @@
             overflow: hidden;
         }
         .header {
-            background-color: #003366; /* Color corporativo oscuro */
+            background-color: #557A4C; /* Color corporativo oscuro */
             color: #ffffff;
             padding: 20px;
             text-align: center;
@@ -40,7 +40,7 @@
         }
         .message-box {
             background-color: #f9f9f9;
-            border-left: 5px solid #ffcc00; /* Línea de destaque */
+            border-left: 5px solid #4BD528; /* Línea de destaque */
             padding: 15px;
             margin-top: 15px;
             margin-bottom: 20px;
