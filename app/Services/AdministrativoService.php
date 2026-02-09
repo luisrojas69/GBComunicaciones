@@ -168,8 +168,8 @@ class AdministrativoService
             ->join('saArticulo AS A', 'FVR.co_art', '=', 'A.co_art')
             
             // 1. FILTRO DE FECHA: Usar la fecha de la factura (fec_emis)
-            ->whereBetween('FV.fec_emis', ['2010-06-01', '2010-06-30'])
-            //->whereBetween('FV.fec_emis', [$fechaInicio, $fechaFin])
+            //->whereBetween('FV.fec_emis', ['2025-01-01', '2026-02-28'])
+            ->whereBetween('FV.fec_emis', [$fechaInicio, $fechaFin])
             
             // 2. FILTRO DE ANULADO: Asegurarse de que no sean facturas anuladas (status = '0')
             ->where('FV.anulado', 0) 
@@ -183,7 +183,7 @@ class AdministrativoService
             )
             ->groupBy('FVR.co_art', 'A.art_des')
             ->orderByDesc('MontoTotal') // Ordenar por el monto de venta
-            ->limit(10) // Traer solo los 10 productos principales (Top 10)
+            ->limit(5) // Traer solo los 5 productos principales (Top 10)
             ->get();
     }
 }

@@ -760,7 +760,7 @@
                 </div>
             </div>
         </div>
-
+        <h2 class="section-title"><i class="fa-solid fa-bag-shopping"></i> Indicadores de Compras</h2>
         {{-- ROW 2: Requisiciones --}}
         <div class="row clearfix">
             <div class="col-12">
@@ -830,7 +830,7 @@
                 </div>
             </div>
         </div>
-
+        <h2 class="section-title"><i class="fa-solid fa-warehouse"></i> Indicadores de Almacén de Suministros</h2>
         {{-- ROW 3: Inventario Crítico --}}
         <div class="row clearfix">
             <div class="col-12">
@@ -885,7 +885,7 @@
             </div>
         </div>
 
-        <h2 class="section-title"><i class="fa-solid fa-users icon icon-people"></i> Gestión de Recursos Humanos</h2>
+        <h2 class="section-title"><i class="fa-solid fa-users icon icon-people"></i> Indicadores de Recursos Humanos</h2>
 
         {{-- ROW 4: Vacaciones y Cumpleaños --}}
         <div class="row clearfix">
@@ -988,6 +988,197 @@
                                 <i class="fa-solid fa-calendar icon-date"></i> Sin cumpleaños registrados para esta semana
                             </div>
                         @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fa-solid fa-leaf"></i> Indicadores de Produccion</h2>
+
+
+        {{-- ROW 5: Pluviometria --}}
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-wrapper">
+                            <div class="card-header-title">
+                                <i class="fa-solid fa-cloud-showers-heavy icon icon-rain"></i>
+                                <span>Resumen Pluviométrico por Sector</span>
+                            </div>
+                            <div class="card-header-badge">
+                                <span class="badge badge-info">Acumulado Mensual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Sector</th>
+                                        <th class="text-center">Acumulado Mes</th>
+                                        <th class="text-center">Último Registro</th>
+                                        <th class="text-center">Cantidad (mm)</th>
+                                        <th class="text-center">Días sin Lluvia</th>
+                                        <th class="text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data['pluviometria'] as $item)
+                                        @php
+                                            $dias = $item['dias_sin_lluvia'];
+                                            // Convertimos a negativo para representar el déficit
+                                            $diasNegativos = $dias !== null ? ($dias * -1) : 0;
+
+                                            // Lógica de Semáforo basada en el valor absoluto
+                                            if ($dias === null || $dias >= 15) {
+                                                $claseBadge = 'badge-danger';
+                                                $textoEstado = 'Crítico';
+                                            } elseif ($dias >= 7) {
+                                                $claseBadge = 'badge-warning';
+                                                $textoEstado = 'Alerta';
+                                            } else {
+                                                $claseBadge = 'badge-success';
+                                                $textoEstado = 'Óptimo';
+                                            }
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex flex-column">
+                                                    <strong>{{ $item['nombre'] }}</strong>
+                                                    <small class="text-muted">{{ $item['codigo'] }}</small>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-primary font-weight-bold">
+                                                    {{ number_format($item['acumulado_mes'], 1, ',', '.') }} mm
+                                                </span>
+                                            </td>
+                                            <td class="text-center">{{ $item['ultima_fecha'] }}</td>
+                                            <td class="text-center">{{ number_format($item['ultima_cantidad'], 1, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                <span class="{{ $dias >= 7 ? 'text-danger' : 'text-dark' }} font-weight-bold">
+                                                    {{ $diasNegativos }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge {{ $claseBadge }}">{{ $textoEstado }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- ROW 5: Pozos --}}
+        <div class="row clearfix" style="margin-top: 30px;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-wrapper">
+                            <div class="card-header-title">
+                                <i class="fa-solid fa-faucet-drip icon icon-pozo"></i>
+                                <span>Disponibilidad de Pozos y Estaciones</span>
+                            </div>
+                            <div class="card-header-badge">
+                                <span class="badge badge-info">Estatus Operativo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <div class="row clearfix" style="margin-bottom: 15px;">
+                                <div class="col-12">
+                                    @php
+                                        $res = $data['resumen_pozos'];
+                                    @endphp
+                                    
+                                    <div class="progress-container" style="padding: 5px 0;">
+                                        <div class="progress-label" style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                            <span>Disponibilidad General de Activos</span>
+                                            <small class="text-muted">
+                                                Total: {{ $res['total_activos'] }} | 
+                                                <span class="text-success">● {{ $res['OPERATIVO']['count'] }}</span> 
+                                                <span class="text-danger" style="margin-left: 5px;">● {{ $res['PARADO']['count'] }}</span>
+                                                <span class="text-warning" style="margin-left: 5px;">● {{ $res['EN_MANTENIMIENTO']['count'] }}</span>
+                                            </small>
+                                        </div>
+                                        
+                                        <div class="progress-bar-wrapper" style="height: 12px; display: flex; background-color: #e9ecef; border-radius: 4px; overflow: hidden;">
+                                            <div class="progress-bar progress-success" 
+                                                 style="width: {{ $res['OPERATIVO']['porcentaje'] }}%; height: 100%; float: left; font-size: 9px; line-height: 12px;">
+                                                 {{ $res['OPERATIVO']['porcentaje'] >= 10 ? number_format($res['OPERATIVO']['porcentaje'], 0).'%' : '' }}
+                                            </div>
+                                            
+                                            <div class="progress-bar progress-danger" 
+                                                 style="width: {{ $res['PARADO']['porcentaje'] }}%; height: 100%; float: left; font-size: 9px; line-height: 12px;">
+                                                 {{ $res['PARADO']['porcentaje'] >= 10 ? number_format($res['PARADO']['porcentaje'], 0).'%' : '' }}
+                                            </div>
+                                            
+                                            <div class="progress-bar progress-warning" 
+                                                 style="width: {{ $res['EN_MANTENIMIENTO']['porcentaje'] }}%; height: 100%; float: left; font-size: 9px; line-height: 12px;">
+                                                 {{ $res['EN_MANTENIMIENTO']['porcentaje'] >= 10 ? number_format($res['EN_MANTENIMIENTO']['porcentaje'], 0).'%' : '' }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Activo</th>
+                                        <th class="text-center">Tipo / Subtipo</th>
+                                        <th class="text-center">Último Cambio</th>
+                                        <th class="text-center">Tiempo en Estatus</th>
+                                        <th class="text-center">Estatus Actual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data['pozos'] as $pozo)
+                                        @php
+                                            // Configuración de Semáforo según estatus
+                                            $claseBadge = match($pozo['estatus']) {
+                                                'OPERATIVO'         => 'badge-success',
+                                                'PARADO'            => 'badge-danger',
+                                                'EN_MANTENIMIENTO'  => 'badge-warning',
+                                                default             => 'badge-secondary'
+                                            };
+
+                                            $icono = $pozo['tipo'] === 'POZO' ? 'fa-bore-hole' : 'fa-gears';
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fa-solid {{ $icono }} text-muted" style="margin-right: 8px;"></i>
+                                                    <strong>{{ $pozo['nombre'] }}</strong>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <small>{{ $pozo['tipo'] }}</small><br>
+                                                <span class="text-muted" style="font-size: 0.85em;">{{ $pozo['subtipo'] }}</span>
+                                            </td>
+                                            <td class="text-center">{{ $pozo['fecha_cambio'] }}</td>
+                                            <td class="text-center">
+                                                <span class="{{ $pozo['estatus'] !== 'OPERATIVO' ? 'text-danger font-weight-bold' : '' }}">
+                                                    {{ $pozo['dias_en_estatus'] }} días
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge {{ $claseBadge }}">
+                                                    {{ $pozo['estatus'] }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

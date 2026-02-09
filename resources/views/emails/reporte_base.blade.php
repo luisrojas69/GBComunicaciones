@@ -67,13 +67,17 @@
                 <li>Estado de Requisiciones Aprobadas.</li>
                 <li>Artículos Críticos en Inventario.</li>
                 <li>Ranking de Ventas por Producto.</li>
+                <li>Personal de Vacaciones.</li>
+                <li>Cumpleañeros de la Semana.</li>
             </ul>
-            
-            <p>Saludos cordiales,</p>
-            <p>El equipo de Automatización.</p>
+
         </div>
         <div class="footer">
-            <p>Este es un mensaje generado automáticamente. Por favor, no responder a este correo.</p>
+            <p style="color: #666;">Este es un mensaje generado automáticamente. Por favor, no responda a este correo.</p>
+            <hr>
+            <p style="color: #888; font-size: 12px;">
+                El reporte adjunto ha sido generado automáticamente sin supervision activa, por lo que algunos indicadores podrían presentar variaciones o contener errores, La información contenida es de carácter informativo y puede estar sujeta a revisiones. Para soporte técnico o aclaratorias, contacte al Departamento de Sistemas. (Ing. Luis Rojas)
+            </p>
         </div>
     </div>
 </body>
